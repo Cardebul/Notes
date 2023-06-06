@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}
+  Страница пользователя {{ instance.username }}
+{% endblock %}
+{% block content %}
+  <h1 class="mb-5 text-center ">Страница пользователя {{ user.username }}</h1>
+      {% if user.is_authenticated and request.user == user %}
+      <h2  class="mb-5 text-center "><a class="mb-5 text-center " href="{% url 'password_change' %}">Изменить пароль</a></h2>
+      {% endif %}
+
+{% endblock %}

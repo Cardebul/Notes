@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col d-flex justify-content-center">
+    <h2>Список заметок</h2>
+    </div>
+    <div class="col d-flex justify-content-center">
+            <ol class="list-group list-group-numbered">
+              {% for note in object_list %}
+              <li class="list-group-item"><a href="{% url 'notes:detail' note.id %}"> {{ note.title }}</a></li>
+              {% endfor %}
+            </ul>
+    </div>
+    
+{% endblock content %}

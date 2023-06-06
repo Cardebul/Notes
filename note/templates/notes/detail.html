@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block title %}Заметка {{ note.id }}{% endblock %}
+{% block content %}
+<div class="col d-flex justify-content-center">
+    <div class="card" style="width: 40rem;">
+      <div class="card-header">
+        <p><a href="{% url 'notes:list' %}">&larr;  К списку заметок</a></p>Заметка с айди {{ note.id }}
+      </div>
+      <div class="card-body">
+<article>
+    <h3>Заголовок : {{ note.title }}</h3>
+    <p>Текст : {{ note.text|linebreaksbr }}</p>
+  </article>
+  <hr>
+  <p>
+    <a href="{% url 'notes:edit' note.id %}"><button type="button" class="btn btn-primary">Редактировать</button></a> 
+    
+  </p>
+  <p>
+    <a href="{% url 'notes:delete' note.id %}"><button type="button" class="btn btn-danger">Удалить</button></a>
+    
+  </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

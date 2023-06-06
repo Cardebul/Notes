@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block title %}
+  {% if '/edit/' in request.path %}
+    Редактирование заметки
+  {% elif "/delete/" in request.path %}
+    Удаление заметки
+  {% else %}
+    Создание заметки
+  {% endif %}
+{% endblock %}
+{% block content %}
+  <div class="col d-flex justify-content-center">
+    <div class="card" style="width: 40rem;">
+      <div class="card-header">
+        {% if '/edit/' in request.path %}
+        Редактирование заметки
+      {% elif "/delete/" in request.path %}
+        Удаление заметки
+      {% else %}
+        Создание заметки
+      {% endif %}
+      </div>
+      <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          {% if not '/delete/' in request.path %}
+            {% bootstrap_form form %}
+          {% bootstrap_button button_type="submit" content="Отправить" %}
+
+          {% else %}
+            <article>
+              <h3>Заголовок : {{ note.title }}</h3>
+              <p>Текст : {{ note.text|linebreaksbr }}</p>
+            </article>
+            <a href="{% url 'notes:delete' note.id %}"><button type="button" class="btn btn-danger">Удалить</button></a>
+          {% endif %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
